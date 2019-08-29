@@ -1,10 +1,9 @@
 package com.nazjara.service;
 
 import com.nazjara.dto.CategoryDTO;
-
-import java.util.List;
+import com.nazjara.dto.CategoryListDTO;
 
 public interface CategoryService {
-    List<CategoryDTO> getCategories();
+    CategoryListDTO getCategories();
     CategoryDTO getCategoryByName(String name);
 }

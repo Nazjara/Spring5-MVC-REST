@@ -1,13 +1,16 @@
 package com.nazjara.service;
 
 import com.nazjara.dto.CategoryDTO;
+import com.nazjara.dto.CategoryListDTO;
 import com.nazjara.mapper.CategoryMapper;
 import com.nazjara.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryMapper categoryMapper;
@@ -20,9 +23,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDTO> getCategories() {
-        return categoryRepository.findAll().stream()
-                .map(category -> categoryMapper.categoryToCategoryDTO(category)).collect(Collectors.toList());
+    public CategoryListDTO getCategories() {
+        CategoryListDTO categories = new CategoryListDTO();
+        categories.setCategories(categoryRepository.findAll().stream()
+                .map(category -> categoryMapper.categoryToCategoryDTO(category)).collect(Collectors.toList()));
+
+        return categories;
     }
 
     @Override

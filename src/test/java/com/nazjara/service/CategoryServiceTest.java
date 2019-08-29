@@ -1,6 +1,7 @@
 package com.nazjara.service;
 
 import com.nazjara.dto.CategoryDTO;
+import com.nazjara.dto.CategoryListDTO;
 import com.nazjara.mapper.CategoryMapper;
 import com.nazjara.model.Category;
 import com.nazjara.repositories.CategoryRepository;
@@ -8,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
@@ -41,9 +41,9 @@ public class CategoryServiceTest {
 
         when(categoryRepository.findAll()).thenReturn(categories);
 
-        List<CategoryDTO> categoryDTOS = categoryService.getCategories();
+        CategoryListDTO categoryList = categoryService.getCategories();
 
-        assertEquals(3, categoryDTOS.size());
+        assertEquals(3, categoryList.getCategories().size());
     }
 
     @Test
