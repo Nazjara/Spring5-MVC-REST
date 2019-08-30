@@ -6,13 +6,10 @@ import com.nazjara.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/categories/")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -22,13 +19,13 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/categories")
+    @GetMapping
     public ResponseEntity<CategoryListDTO> listCategories() {
         return new ResponseEntity<>(categoryService.getCategories(), HttpStatus.OK);
     }
 
-    @GetMapping("/category")
-    public ResponseEntity<CategoryDTO> listCategories(@RequestParam String name) {
+    @GetMapping("{name}")
+    public ResponseEntity<CategoryDTO> listCategories(@PathVariable String name) {
         return new ResponseEntity<>(categoryService.getCategoryByName(name), HttpStatus.OK);
     }
 }
