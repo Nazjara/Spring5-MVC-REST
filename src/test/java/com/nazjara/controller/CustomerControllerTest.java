@@ -15,11 +15,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
 
+import static com.nazjara.AbstractRestControllerTest.asJsonString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,12 +48,10 @@ public class CustomerControllerTest {
         CustomerDTO customer1 = new CustomerDTO();
         customer1.setFirstName("Michale");
         customer1.setLastName("Weston");
-        customer1.setCustomerUrl("/api/v1/customers/1");
 
         CustomerDTO customer2 = new CustomerDTO();
         customer2.setFirstName("Sam");
         customer2.setLastName("Axe");
-        customer2.setCustomerUrl("/api/v1/customers/2");
 
         customerListDTO.setCustomers(Arrays.asList(customer1, customer2));
 
@@ -68,7 +68,6 @@ public class CustomerControllerTest {
         CustomerDTO customer1 = new CustomerDTO();
         customer1.setFirstName("Michale");
         customer1.setLastName("Weston");
-        customer1.setCustomerUrl("/api/v1/customers/1");
 
         when(customerService.getCustomerById(anyLong())).thenReturn(customer1);
 
@@ -76,5 +75,24 @@ public class CustomerControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName", equalTo("Michale")));
+    }
+
+    @Test
+    public void createNewCustomer() throws Exception {
+        CustomerDTO customer = new CustomerDTO();
+        customer.setFirstName("Fred");
+        customer.setLastName("Flintstone");
+
+        CustomerDTO returnDTO = new CustomerDTO();
+        returnDTO.setFirstName(customer.getFirstName());
+        returnDTO.setLastName(customer.getLastName());
+
+        when(customerService.createCustomer(customer)).thenReturn(returnDTO);
+
+        mockMvc.perform(post("/api/v1/customers")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(customer)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.firstName", equalTo("Fred")));
     }
 }

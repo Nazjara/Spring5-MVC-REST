@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/categories/")
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -20,12 +20,12 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<CategoryListDTO> listCategories() {
+    public ResponseEntity<CategoryListDTO> list() {
         return new ResponseEntity<>(categoryService.getCategories(), HttpStatus.OK);
     }
 
-    @GetMapping("{name}")
-    public ResponseEntity<CategoryDTO> listCategories(@PathVariable String name) {
+    @GetMapping("/{name}")
+    public ResponseEntity<CategoryDTO> getByName(@PathVariable String name) {
         return new ResponseEntity<>(categoryService.getCategoryByName(name), HttpStatus.OK);
     }
 }

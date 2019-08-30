@@ -4,6 +4,7 @@ import com.nazjara.dto.CustomerDTO;
 import com.nazjara.dto.CustomerListDTO;
 import com.nazjara.mapper.CustomerMapper;
 import com.nazjara.mapper.CustomerMapper;
+import com.nazjara.model.Customer;
 import com.nazjara.repositories.CustomerRepository;
 import com.nazjara.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO getCustomerById(Long id) {
         return customerMapper.customerToCustomerDTO(customerRepository.findById(id).orElse(null));
+    }
+
+    @Override
+    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
+        Customer customer = customerMapper.customerDTOToCustomer(customerDTO);
+        return customerMapper.customerToCustomerDTO(customerRepository.save(customer));
     }
 }
