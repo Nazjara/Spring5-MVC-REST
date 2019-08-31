@@ -96,7 +96,7 @@ public class CustomerServiceTest {
 
         when(customerRepository.save(any(Customer.class))).thenReturn(savedCustomer);
 
-        CustomerDTO savedDto = customerService.updateCustomer(1L, customerDTO);
+        CustomerDTO savedDto = customerService.replaceCustomer(1L, customerDTO);
 
         assertEquals(customerDTO.getFirstName(), savedDto.getFirstName());
     }
