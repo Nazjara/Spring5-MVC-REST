@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -52,7 +53,7 @@ public class CategoryServiceTest {
         category.setId(ID);
         category.setName(NAME);
 
-        when(categoryRepository.findByName(anyString())).thenReturn(category);
+        when(categoryRepository.findByName(anyString())).thenReturn(Optional.of(category));
 
         CategoryDTO categoryDTO = categoryService.getCategoryByName(NAME);
 

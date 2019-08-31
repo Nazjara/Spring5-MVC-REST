@@ -2,6 +2,7 @@ package com.nazjara.service;
 
 import com.nazjara.dto.CustomerDTO;
 import com.nazjara.dto.CustomerListDTO;
+import com.nazjara.exception.ResourceNotFoundException;
 import com.nazjara.mapper.CustomerMapper;
 import com.nazjara.model.Customer;
 import com.nazjara.repositories.CustomerRepository;
@@ -33,7 +34,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO getCustomerById(Long id) {
-        return customerMapper.customerToCustomerDTO(customerRepository.findById(id).orElse(null));
+        return customerMapper.customerToCustomerDTO(customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Customer with id = %d not found", id))));
     }
 
     @Override
@@ -62,7 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
             }
 
             return customerMapper.customerToCustomerDTO(customerRepository.save(customer));
-        }).orElse(null);
+        }).orElseThrow(() -> new ResourceNotFoundException(String.format("Customer with id = %d not found", id)));
     }
 
     @Override

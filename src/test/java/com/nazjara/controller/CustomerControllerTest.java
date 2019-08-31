@@ -2,6 +2,7 @@ package com.nazjara.controller;
 
 import com.nazjara.dto.CustomerDTO;
 import com.nazjara.dto.CustomerListDTO;
+import com.nazjara.exception.ResourceNotFoundException;
 import com.nazjara.service.CustomerService;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +40,9 @@ public class CustomerControllerTest {
 
     @Before
     public void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(customerController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(customerController)
+                .setControllerAdvice(new RestResponseEntityExceptionHandler())
+                .build();
     }
 
     @Test
@@ -143,5 +146,14 @@ public class CustomerControllerTest {
                 .andExpect(status().isOk());
 
         verify(customerService).deleteCustomer(anyLong());
+    }
+
+    @Test
+    public void testNotFoundException() throws Exception {
+        when(customerService.getCustomerById(anyLong())).thenThrow(ResourceNotFoundException.class);
+
+        mockMvc.perform(get("/api/v1/customers/1000")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 }
