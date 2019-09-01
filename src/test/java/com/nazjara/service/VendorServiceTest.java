@@ -68,7 +68,7 @@ public class VendorServiceTest {
         given(vendorRepository.findByName("Vendor1")).willReturn(Optional.empty());
 
         //when
-        VendorDTO vendorDTO = vendorService.getVendorByName("Vendor1");
+        vendorService.getVendorByName("Vendor1");
 
         //then
         then(vendorRepository).should(times(1)).findByName("Vendor1");
@@ -95,7 +95,6 @@ public class VendorServiceTest {
         VendorDTO vendorDTO = new VendorDTO();
         vendorDTO.setId(ID_1);
         vendorDTO.setName(NAME_1);
-
 
         Vendor vendor = getVendor1();
 

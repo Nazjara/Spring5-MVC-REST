@@ -10,13 +10,14 @@
     </parent>
     <groupId>com.nazjara</groupId>
     <artifactId>spring5-mvc-rest</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>Spring5-MVC-REST</name>
     <description>Spring5-MVC-REST</description>
 
     <properties>
         <java.version>11</java.version>
         <mapstruct.version>1.3.0.Final</mapstruct.version>
+        <springfox.version>2.9.2</springfox.version>
     </properties>
 
     <dependencies>
@@ -49,6 +50,16 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
