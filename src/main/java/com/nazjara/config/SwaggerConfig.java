@@ -16,6 +16,7 @@ import java.util.Collections;
 @EnableSwagger2
 public class SwaggerConfig {
 
+//    https://springframework.guru/spring-boot-restful-api-documentation-with-swagger-2/
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
