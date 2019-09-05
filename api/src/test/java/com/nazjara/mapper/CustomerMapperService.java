@@ -3,8 +3,6 @@ package com.nazjara.mapper;
 import com.nazjara.dto.CustomerDTO;
 import com.nazjara.model.Customer;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import static junit.framework.TestCase.assertEquals;
 
