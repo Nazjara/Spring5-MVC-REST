@@ -1,7 +1,7 @@
 package com.nazjara.service;
 
 import com.nazjara.bootstrap.DataLoader;
-import com.nazjara.dto.CustomerDTO;
+import com.nazjara.model.CustomerDTO;
 import com.nazjara.mapper.CustomerMapper;
 import com.nazjara.model.Customer;
 import com.nazjara.repositories.CategoryRepository;

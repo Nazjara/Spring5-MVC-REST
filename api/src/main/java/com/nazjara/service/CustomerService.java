@@ -1,7 +1,7 @@
 package com.nazjara.service;
 
-import com.nazjara.dto.CustomerDTO;
-import com.nazjara.dto.CustomerListDTO;
+import com.nazjara.model.CustomerDTO;
+import com.nazjara.model.CustomerListDTO;
 
 public interface CustomerService {
     CustomerListDTO getCustomers();

@@ -1,7 +1,7 @@
 package com.nazjara.controller;
 
-import com.nazjara.dto.CustomerDTO;
-import com.nazjara.dto.CustomerListDTO;
+import com.nazjara.model.CustomerDTO;
+import com.nazjara.model.CustomerListDTO;
 import com.nazjara.exception.ResourceNotFoundException;
 import com.nazjara.service.CustomerService;
 import org.junit.Before;
@@ -57,7 +57,7 @@ public class CustomerControllerTest {
         customer2.setFirstName("Sam");
         customer2.setLastName("Axe");
 
-        customerListDTO.setCustomers(Arrays.asList(customer1, customer2));
+        customerListDTO.getCustomers().addAll(Arrays.asList(customer1, customer2));
 
         when(customerService.getCustomers()).thenReturn(customerListDTO);
 
@@ -89,11 +89,7 @@ public class CustomerControllerTest {
         customer.setFirstName("Fred");
         customer.setLastName("Flintstone");
 
-        CustomerDTO returnDTO = new CustomerDTO();
-        returnDTO.setFirstName(customer.getFirstName());
-        returnDTO.setLastName(customer.getLastName());
-
-        when(customerService.createCustomer(customer)).thenReturn(returnDTO);
+        when(customerService.createCustomer(any())).thenReturn(customer);
 
         mockMvc.perform(post("/api/v1/customers")
                 .accept(MediaType.APPLICATION_JSON)

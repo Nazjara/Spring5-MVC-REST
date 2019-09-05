@@ -1,7 +1,7 @@
 package com.nazjara.controller;
 
-import com.nazjara.dto.CustomerDTO;
-import com.nazjara.dto.CustomerListDTO;
+import com.nazjara.model.CustomerDTO;
+import com.nazjara.model.CustomerListDTO;
 import com.nazjara.service.CustomerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

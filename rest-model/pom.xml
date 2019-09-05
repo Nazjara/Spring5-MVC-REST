@@ -54,6 +54,7 @@
                             <xsdOptions>
                                 <xsdOption>
                                     <xsd>src/main/resources/xsd/customer.xsd</xsd>
+                                    <packagename>com.nazjara.model</packagename>
                                 </xsdOption>
                             </xsdOptions>
                         </configuration>

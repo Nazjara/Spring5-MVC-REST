@@ -1,10 +1,10 @@
 package com.nazjara.service;
 
-import com.nazjara.dto.CustomerDTO;
-import com.nazjara.dto.CustomerListDTO;
+import com.nazjara.model.CustomerDTO;
 import com.nazjara.exception.ResourceNotFoundException;
 import com.nazjara.mapper.CustomerMapper;
 import com.nazjara.model.Customer;
+import com.nazjara.model.CustomerListDTO;
 import com.nazjara.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +26,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerListDTO getCustomers() {
         CustomerListDTO customers = new CustomerListDTO();
-        customers.setCustomers(customerRepository.findAll().stream()
-                .map(customer -> customerMapper.customerToCustomerDTO(customer)).collect(Collectors.toList()));
+        customers.getCustomers().addAll(customerRepository.findAll().stream()
+                .map(customer -> customerMapper.customerToCustomerDTO(customer))
+                .collect(Collectors.toList()));
 
         return customers;
     }
