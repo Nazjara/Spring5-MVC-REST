@@ -13,6 +13,10 @@
     <name>Spring5-MVC-Model</name>
     <description>Spring5-MVC-Model</description>
 
+    <properties>
+        <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>javax.xml.bind</groupId>
